@@ -4,9 +4,16 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'dart:async';
 import '../models/item_model.dart';
+import 'repository.dart';
 
-class NewsDbProvider {
+class NewsDbProvider implements Source, Cache{
   Database db;
+
+  @override
+    Future<List<int>> fetchTopIds() {
+      // TODO: implement fetchTopIds
+      return null;
+    }
 
   void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
