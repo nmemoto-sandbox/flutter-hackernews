@@ -32,11 +32,13 @@ class NewsDbProvider implements Source, Cache{
               id INTEGER PRIMARY KEY,
               type TEXT,
               by TEXT,
+              time INTEGER,
               text TEXT,
               parent INTEGER,
               kids BLOB,
               dead INTEGER,
               deleted INTEGER,
+              url TEXT,
               score INTEGER,
               title TEXT,
               descendants INTEGER
@@ -61,7 +63,11 @@ class NewsDbProvider implements Source, Cache{
   }
 
   Future<int> addItem(ItemModel item) {
-    return db.insert("Items", item.toMap());
+    return db.insert(
+      "Items", 
+      item.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
   }
 }
 
